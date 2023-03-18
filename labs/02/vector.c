@@ -48,16 +48,10 @@ vector_t *vector_new() {
 /* Free up the memory allocated for the passed vector */
 void vector_delete(vector_t *v) {
 	/* Remember, you need to free up ALL the memory that is allocated */
-	
-
-
-
-
 	/* ADD CODE HERE */
-
-
-
-
+    free(v->data);
+    free(v);
+    return;
 }
 
 /* Return the value in the vector */
@@ -87,12 +81,22 @@ void vector_set(vector_t *v, size_t loc, int value) {
 	/* What do you need to do if the location is greater than the size we have
 	 * allocated?  Remember that unset locations should contain a value of 0.
 	 */
-
-
-
+    if (loc >= v->size) {
+        size_t size = loc + 1;
+        int *temp = (int*) malloc((loc + 1) * sizeof(int));
+        int i;
+        for (i = 0; i < v->size; i = i + 1) {
+            temp[i] = v->data[i];
+        }
+        for (; i < size - 1; i = i + 1) {
+            temp[i] = 0;
+        }
+        temp[loc] = value;
+        v->size = size;
+        v->data = temp;
+        return;
+    }
 	/* ADD CODE HERE */
-
-
-
-
+    v->data[loc] = value;
+    return;
 }

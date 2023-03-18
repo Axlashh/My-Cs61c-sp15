@@ -3,10 +3,24 @@
 #include <stdlib.h>
 #include <string.h>
 
+void set_bit(uint16_t * x,
+             unsigned n,
+             unsigned v) {
+    // YOUR CODE HERE
+    unsigned a = ~0;
+    a = a ^ (1 << n);
+    *x = *x & a;
+    *x = *x | (v << n);
+}
+
 void lfsr_calculate(uint16_t *reg) {
 
-  /* YOUR CODE HERE */
-
+    int n = *reg & 1;
+    n ^= (*reg >> 2) & 1;
+    n ^= (*reg >> 3) & 1;
+    n ^= (*reg >> 5) & 1;
+    *reg = *reg >> 1;
+    set_bit(reg, 15, n);
 }
 
 int main() {

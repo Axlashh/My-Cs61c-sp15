@@ -28,9 +28,6 @@ lfsr: lfsr.c
 bit_ops: bit_ops.c
 	$(CC) $(CFLAGS) -o bit_ops bit_ops.c
 
-bit_ops_test: bit_ops_test.c
-	$(CC) $(CFLAGS) -o bit_ops_test bit_ops_test.c
-
 .c.o:
 	$(CC) -c -pedantic $(CFLAGS) $<
 
